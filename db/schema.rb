@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_104924) do
+ActiveRecord::Schema.define(version: 20190922181055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "draws", force: :cascade do |t|
+    t.integer "tournaments_id"
+    t.boolean "is_single"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.string "name"
+    t.string "first_name"
+    t.string "phone"
+    t.string "email"
+    t.string "classing"
+    t.float "classing_value"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "tournament_id"
+    t.index ["tournament_id"], name: "index_registrations_on_tournament_id"
+  end
 
   create_table "tournaments", force: :cascade do |t|
     t.string "title"
@@ -22,4 +44,5 @@ ActiveRecord::Schema.define(version: 2019_06_10_104924) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "registrations", "tournaments"
 end

@@ -1,0 +1,67 @@
+<div class="row">
+	<h2>Anmeldung für die <%= @registration.tournament.title %></h2>
+
+	<%= form_for @registration, :html => {:class => "form-horizontal"} do %>
+	<% if @registration.errors.any? %>
+	<% @registration.errors.full_messages.each do |msg| %>
+	<div class="alert alert-error fade in">
+		<a class="close" data-dismiss="alert" href="#">&times;</a>
+		<%= msg %>
+	</div>
+	<% end %>
+	<% end %>
+	<div class="form-group row">
+		<%= hidden_field_tag 'tournament_id', @registration.tournament_id %> 
+		<label for="registration_last_name" class="col-sm-2 form-control-label">Name</label>
+		<div class="col-sm-10">
+			<%= text_field(:registration, :name) %>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="registration_first_name" class="col-sm-2 form-control-label">Vorname</label>
+		<div class="col-sm-10">
+			<%= text_field(:registration, :first_name) %>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="registration_email" class="col-sm-2 form-control-label">E-Mail</label>
+		<div class="col-sm-10">
+			<%= text_field(:registration, :email) %>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="registration_telefon" class="col-sm-2 form-control-label">Telefon</label>
+		<div class="col-sm-10">
+			<%= text_field(:registration, :phone) %>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="registration_classing" class="col-sm-2 form-control-label">Klassierung</label>
+		<div class="col-sm-10">
+			<%= text_field(:registration, :classing) %>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="registration_classing_value" class="col-sm-2 form-control-label">Klassierungswert</label>
+		<div class="col-sm-10">
+			<%= text_field(:registration, :classing_value) %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label for="registration_bemerkung" class="control-label">Bemerkung</label>
+		<div class="controls">
+			<%= text_area(:registration, :comment, :size=>"100") %>
+		</div>
+	</div>
+	<div class="form-actions">
+		<%= submit_tag "Anmelden", :class => "btn btn-lg btn-primary"  %>
+	</div>
+	<% end %>
+
+	<%= link_to 'Zurück', registrations_path %>
+</div>
