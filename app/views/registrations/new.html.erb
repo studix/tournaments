@@ -1,6 +1,5 @@
 <div class="row">
 	<h2>Anmeldung für die <%= @registration.tournament.title %></h2>
-
 	<%= form_for @registration, :html => {:class => "form-horizontal"} do %>
 	<% if @registration.errors.any? %>
 	<% @registration.errors.full_messages.each do |msg| %>
@@ -10,6 +9,21 @@
 	</div>
 	<% end %>
 	<% end %>
+	
+	<fieldset class="form-group">
+		<div class="row">
+			<legend class="col-form-label col-sm-2 pt-0">Tableaux</legend>
+			<div class="col-sm-10">
+				<% @tournament.draws.each do |draw| %>
+					<div class="form-checkbox">
+						<input type="checkbox" class="form-check-input" value="<%=draw.id%>" id="drawCheckBox<%=draw.id%>"/>
+						<label class="form-check-label" for="customCheck1"><%=draw.title%></label>
+					</div>	
+				<% end %>
+			</div>
+		</div>
+	</fieldset>
+	
 	<div class="form-group row">
 		<%= hidden_field_tag 'tournament_id', @registration.tournament_id %> 
 		<label for="registration_last_name" class="col-sm-2 form-control-label">Name</label>
@@ -62,6 +76,4 @@
 		<%= submit_tag "Anmelden", :class => "btn btn-lg btn-primary"  %>
 	</div>
 	<% end %>
-
-	<%= link_to 'Zurück', registrations_path %>
 </div>

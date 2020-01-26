@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20190922181055) do
   enable_extension "plpgsql"
 
   create_table "draws", force: :cascade do |t|
-    t.integer "tournaments_id"
+    t.integer "tournament_id"
     t.boolean "is_single"
     t.string "title"
     t.datetime "created_at", null: false
