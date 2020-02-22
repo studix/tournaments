@@ -25,9 +25,9 @@ class RegistrationsController < ApplicationController
    # GET /registrations/new
    # GET /registrations/new.json
    def new
-     @tournament = Tournament.find(params[:tournament_id])
-     @registration = Registration.new
-     @registration.tournament = @tournament
+     tournament = Tournament.find(params[:tournament_id])
+     @registration = Registration.new(tournament:tournament)
+     
  
      respond_to do |format|
        format.html # new.html.erb
