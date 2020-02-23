@@ -12,9 +12,10 @@
   <tbody>
     <% @registrations.each do |registration| %>
       <tr>
-        <td><%= link_to 'Show', registration %></td>
-        <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
-        <td><%= link_to 'Destroy', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', tournament_registration_path(registration.tournament, registration) %></td>
+        <td><%= link_to 'Edit', edit_tournament_registration_path(registration.tournament, registration) %></td>
+        <td><%= link_to "delete", tournament_registration_path(registration.tournament, registration), :method => :delete, :confirm => "Are you sure?" %></td>
+     
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Registration', new_registration_path %>
+<%= link_to 'New Registration', new_tournament_registration_path(params[:tournament_id]) %>

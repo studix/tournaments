@@ -3,7 +3,7 @@ class RegistrationsController < ApplicationController
    # GET /registrations
    # GET /registrations.json
    def index
-     @registrations = Registration.where(tournament_id: Tournament.select(:id).order('id desc').first)
+     @registrations = Tournament.find(params[:tournament_id]).registrations
  
      respond_to do |format|
        format.html # index.html.erb
@@ -27,56 +27,35 @@ class RegistrationsController < ApplicationController
    def new
      tournament = Tournament.find(params[:tournament_id])
      @registration = Registration.new(tournament:tournament)
-     
- 
+
      respond_to do |format|
        format.html # new.html.erb
        format.json { render json: @registration }
      end
    end
  
-   # GET /registrations/1/edit
-   def edit
-     @registration = Registration.find(params[:id])
-   end
- 
    # POST /registrations
    # POST /registrations.json
    def create
-     @registration = Registration.new(params[:registration])
-     @registration.tournament_id = params[:tournament_id]
-       if @registration.save
-         RegistrationMailer.confirmation_email(@registration).deliver
+     @registration = Registration.new(registration_params)
+     @registration.tournament = Tournament.find(params[:tournament_id])
+     if @registration.valid?
+         @registration.save
+         # RegistrationMailer.confirmation_email(@registration).deliver
          flash[:notice] = 'Danke für deine Anmeldung. Du wirst in Kürze eine Bestätigungsmail erhalten.'
-         redirect_to @registration
-       else
-         render action: "new"
-       end
+         redirect_to tournament_registrations_url
+     else
+      render :new
+     end
    end
  
    def confirmation
    end
  
-   # PUT /registrations/1
-   # PUT /registrations/1.json
-   def update
-     @registration = Registration.find(params[:id])
- 
-     respond_to do |format|
-       if @registration.update_attributes(params[:registration])
-         format.html { redirect_to @registration, notice: 'Registration was successfully updated.' }
-         format.json { head :no_content }
-       else
-         format.html { render action: "edit" }
-         format.json { render json: @registration.errors, status: :unprocessable_entity }
-       end
-     end
-   end
- 
    # DELETE /registrations/1
    # DELETE /registrations/1.json
    def destroy
-     @registration = Registration.find(params[:id])
+     @registration = Registration.find(registration_params[:id])
      @registration.destroy
  
      respond_to do |format|
@@ -84,4 +63,10 @@ class RegistrationsController < ApplicationController
        format.json { head :no_content }
      end
    end
- end
+
+   private
+    # Never trust parameters from the scary internet, only allow the white list through.
+      def registration_params
+        params.require(:registration).permit(:tournament_id, :name, :first_name, :email, :classing, :classing_value, :comment, :phone, :draw_ids, draw:[])
+      end
+  end
