@@ -2,20 +2,35 @@
 
 <h1>Registrations</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th scope="col">Vorname</th>
+      <th scope="col">Nachname</th>
+      <th scope="col">Email</th>
+      <th scope="col">Telefon</th>
+      <th scope="col">Klassierung</th>
+      <th scope="col">Klassierungswert</th>
+      <th scope="col">Bemerkung</th>
+      <th scope="col">Tableaux</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @registrations.each do |registration| %>
       <tr>
-        <td><%= link_to 'Show', tournament_registration_path(registration.tournament, registration) %></td>
-        <td><%= link_to 'Edit', edit_tournament_registration_path(registration.tournament, registration) %></td>
-        <td><%= link_to "delete", tournament_registration_path(registration.tournament, registration), :method => :delete, :confirm => "Are you sure?" %></td>
-     
+       <td> <%=registration.first_name%></td>
+       <td> <%=registration.name%></td>
+       <td> <%=registration.email%></td>
+       <td> <%=registration.phone%></td>
+      <td> <%=registration.classing%></td>
+      <td> <%=registration.classing_value%></td>
+       <td> <%=registration.comment%></td>
+       <td> <%=registration.draw_ids%></td>
+        <td><%= link_to "Löschen", tournament_registration_path(registration.tournament, registration), :method => :delete, :confirm => "Bist du sicher?" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Registration', new_tournament_registration_path(params[:tournament_id]) %>
+<%= link_to 'Anmeldung erstellen', new_tournament_registration_path(params[:tournament_id]) %>
