@@ -43,7 +43,7 @@ class RegistrationsController < ApplicationController
          @registration.save
          # RegistrationMailer.confirmation_email(@registration).deliver
          flash[:notice] = 'Danke für deine Anmeldung. Du wirst in Kürze eine Bestätigungsmail erhalten.'
-         redirect_to tournament_registrations_url
+         redirect_to tournament_registration_path(@registration.tournament, @registration)
      else
       render :new
      end

@@ -1,0 +1,42 @@
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th style="width: 16.66%" scope="row">Name:</th>
+      <td><%= @registration.name %></td>
+    </tr>
+    <tr>
+      <th scope="row">Vorname:</th>
+      <td> <%= @registration.first_name %></td>
+    </tr>
+    <tr>
+      <th scope="row">E-Mail:</th>
+      <td><%=@registration.email%></td>
+    </tr>
+    <tr>
+      <th scope="row">Telefonnummer:</th>
+      <td><%= @registration.phone %></td>
+    </tr>
+    <tr>
+      <th scope="row">Klassierung:</th>
+      <td> <%= @registration.classing %></td>
+    </tr>
+    <tr>
+      <th scope="row">Klassierungswert:</th>
+      <td><%=@registration.classing_value%></td>
+    </tr>
+      <tr>
+      <th scope="row">Bemerkung:</th>
+      <td><%=@registration.comment%></td>
+    </tr>
+     <tr>
+      <th scope="row">Angemeldet für:</th>
+      <td>
+        <ul>
+          <%  for draw in @registration.tournament.draws %>
+          <li><%=draw.title%></li>
+          <%  end %>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
