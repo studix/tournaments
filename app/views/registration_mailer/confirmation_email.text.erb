@@ -1,0 +1,8 @@
+Hallo <%=@registration.first_name%>
+
+Vielen Dank für deine Anmeldung zu den Clubmeisterschaften. Du hast dich für folgende Konkurrenzen angemeldet:
+<%  for draw in @registration.draws %>
+- <%=draw%>
+<%  end %>
+
+Die Turnierleitung

@@ -41,7 +41,7 @@ class RegistrationsController < ApplicationController
      @registration.tournament = Tournament.find(params[:tournament_id])
      if @registration.valid?
          @registration.save
-         # RegistrationMailer.confirmation_email(@registration).deliver
+         RegistrationMailer.confirmation_email(@registration).deliver
          flash[:notice] = 'Danke für deine Anmeldung. Du wirst in Kürze eine Bestätigungsmail erhalten.'
          redirect_to tournament_registration_path(@registration.tournament, @registration)
      else
