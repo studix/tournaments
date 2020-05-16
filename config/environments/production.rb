@@ -68,11 +68,11 @@ Rails.application.configure do
     :address => "smtp.sendgrid.net" ,
     :port => 465,
     :domain => "tcdulliken.ch" ,
+    :tls => true,
     :authentication => :plain,
     :user_name => ENV['SENDGRID_USERNAME'] ,
     :password => ENV['SENDGRID_PASSWORD'],
-    :enable_starttls_auto => true,
-    :openssl_verify_mode  => 'none'
+    :enable_starttls_auto => true
   }
 
 
