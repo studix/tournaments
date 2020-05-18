@@ -27,6 +27,11 @@ class RegistrationsController < ApplicationController
    def new
      tournament = Tournament.find(params[:tournament_id])
      @registration = Registration.new(tournament:tournament)
+     tournament.draws.each do |draw|
+        dreg = DrawRegistration.new(draw: draw)
+        @registration.draw_registrations << dreg
+        logger.info "New draw registration: #{dreg.draw.id} #{dreg.draw.title}"
+     end
 
      respond_to do |format|
        format.html # new.html.erb
@@ -39,6 +44,7 @@ class RegistrationsController < ApplicationController
    def create
      @registration = Registration.new(registration_params)
      @registration.tournament = Tournament.find(params[:tournament_id])
+
      if @registration.valid?
          @registration.save
          RegistrationMailer.confirmation_email(@registration).deliver
@@ -67,6 +73,7 @@ class RegistrationsController < ApplicationController
    private
     # Never trust parameters from the scary internet, only allow the white list through.
       def registration_params
-        params.require(:registration).permit(:tournament_id, :name, :first_name, :email, :classing, :classing_value, :comment, :phone, :draw_ids, draw:[])
+        params.require(:registration).permit(:tournament_id, :name, :first_name, :email, :classing, :classing_value, :comment, :phone, 
+          draw_registrations: [:id, :partner, :draw_id])
       end
   end

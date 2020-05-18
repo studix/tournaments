@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200222122649) do
+ActiveRecord::Schema.define(version: 20200518081922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "draw_registrations", force: :cascade do |t|
+    t.bigint "draw_id"
+    t.bigint "registration_id"
+    t.boolean "is_registered"
+    t.string "partner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["draw_id"], name: "index_draw_registrations_on_draw_id"
+    t.index ["registration_id"], name: "index_draw_registrations_on_registration_id"
+  end
 
   create_table "draws", force: :cascade do |t|
     t.integer "tournament_id"
@@ -21,14 +32,6 @@ ActiveRecord::Schema.define(version: 20200222122649) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "draws_registrations", id: false, force: :cascade do |t|
-    t.bigint "registration_id"
-    t.bigint "draw_id"
-    t.index ["draw_id"], name: "index_draws_registrations_on_draw_id"
-    t.index ["registration_id", "draw_id"], name: "index_draws_registrations_on_registration_id_and_draw_id"
-    t.index ["registration_id"], name: "index_draws_registrations_on_registration_id"
   end
 
   create_table "registrations", force: :cascade do |t|

@@ -1,6 +1,6 @@
 <div class="row">
 	<h2>Anmeldung für die <%= @registration.tournament.title %></h2>
-	<%= form_for [@registration.tournament, @registration], :html => {:class => "form-horizontal"} do %>
+	<%= form_for [@registration.tournament, @registration], :html => {:class => "form-horizontal"} do |registration_form| %>
 
 	
 	<fieldset class="form-group">
@@ -8,13 +8,16 @@
 			<legend class="col-form-label col-sm-2 pt-0">Tableaux</legend>
 			<div class="col-sm-10">
 
-			 <%= collection_check_boxes :registration, :draw_ids, @registration.tournament.draws, :id, :title do |b| %>
-				<div class="form-check">
-					<%=b.check_box(class: "form-check-input")%>
-					<%=b.label(class: "form-check-label")%>
-					</div>
-  				<% end %>
+			<%= registration_form.fields_for :draw_registrations do |draw_registrations_fields| %>
+			<div class="form-check">
+				<%=draw_registrations_fields.check_box(:is_registered, class: "form-check-input")%>
+				<label for="registration_draw" class="form-control-label"><%=@registration.tournament.draws.find(draw_registrations_fields.index+1).title%></label>
+				<% if !draw_registrations_fields.object.draw.is_single? %>
+				   <%= draw_registrations_fields.label(:partner, class: "form-control-label") %>
+                  <%= draw_registrations_fields.text_field(:partner, class: "form-text-input") %>
+				<% end%>
 			</div>
+			<%end%>
 		</div>
 	</fieldset>
 	<div class="form-group row">

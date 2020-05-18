@@ -29,7 +29,6 @@
       <td> <%=registration.classing%></td>
       <td> <%=registration.classing_value%></td>
        <td> <%=registration.comment%></td>
-       <td> <%=registration.draw_ids%></td>
         <td><%= link_to "Löschen", tournament_registration_path(registration.tournament, registration), :method => :delete, :confirm => "Bist du sicher?" %></td>
       </tr>
     <% end %>
