@@ -10,8 +10,9 @@
 
 			<%= registration_form.fields_for :draw_registrations do |draw_registrations_fields| %>
 			<div class="form-check">
+				<%= draw_registrations_fields.hidden_field :draw_id, value: draw_registrations_fields.object.draw_id %>
 				<%=draw_registrations_fields.check_box(:is_registered, class: "form-check-input")%>
-				<label for="registration_draw" class="form-control-label"><%=@registration.tournament.draws.find(draw_registrations_fields.index+1).title%></label>
+				<label for="registration_draw" class="form-control-label"><%=draw_registrations_fields.object.draw.title%></label>
 				<% if !draw_registrations_fields.object.draw.is_single? %>
 				   <%= draw_registrations_fields.label(:partner, class: "form-control-label") %>
                   <%= draw_registrations_fields.text_field(:partner, class: "form-text-input") %>
@@ -23,52 +24,52 @@
 	<div class="form-group row">
 		<label for="registration_first_name" class="col-sm-2 form-control-label">Vorname</label>
 		<div class="col-sm-10">
-			<%= text_field(:registration, :first_name, class: "form-control") %>
+			<%= registration_form.text_field(:first_name, class: "form-control") %>
 		</div>
 	</div>
 	<div class="form-group row">
 		<%= hidden_field_tag 'tournament_id', @registration.tournament_id %> 
 		<label for="registration_last_name" class="col-sm-2 form-control-label">Name</label>
 		<div class="col-sm-10">
-			<%= text_field(:registration, :name, class: "form-control") %>
+			<%= registration_form.text_field(:name, class: "form-control") %>
 		</div>
     </div>
 	<div class="form-group row">
 		<label for="registration_email" class="col-sm-2 form-control-label">E-Mail</label>
 		<div class="col-sm-10">
-			<%= text_field(:registration, :email, class: "form-control") %>
+			<%= registration_form.text_field(:email, class: "form-control") %>
 		</div>
 	</div>
 
 	<div class="form-group row">
 		<label for="registration_phone" class="col-sm-2 form-control-label">Telefon</label>
 		<div class="col-sm-10">
-			<%= text_field(:registration, :phone, class: "form-control") %>
+			<%= registration_form.text_field(:phone, class: "form-control") %>
 		</div>
 	</div>
 
 	<div class="form-group row">
 		<label for="registration_classing" class="col-sm-2 form-control-label">Klassierung</label>
 		<div class="col-sm-10">
-			<%= text_field(:registration, :classing, class: "form-control") %>
+			<%= registration_form.text_field(:classing, class: "form-control") %>
 		</div>
 	</div>
 
 	<div class="form-group row">
 		<label for="registration_classing_value" class="col-sm-2 form-control-label">Klassierungswert</label>
 		<div class="col-sm-10">
-			<%= text_field(:registration, :classing_value, class: "form-control") %>
+			<%= registration_form.text_field(:classing_value, class: "form-control") %>
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<label for="registration_remarks" class="control-label">Bemerkung</label>
 		<div class="controls">
-			<%= text_area(:registration, :comment, :size=>"100", class: "form-control") %>
+			<%= registration_form.text_area(:comment, :size=>"100", class: "form-control") %>
 		</div>
 	</div>
 	<div class="form-actions">
-		<%= submit_tag "Anmelden", :class => "btn btn-lg btn-primary"  %>
+		<%= registration_form.submit "Anmelden", :class => "btn btn-lg btn-primary"  %>
 	</div>
 	<% end %>
 </div>
