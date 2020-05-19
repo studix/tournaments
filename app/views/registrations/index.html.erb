@@ -29,6 +29,17 @@
       <td> <%=registration.classing%></td>
       <td> <%=registration.classing_value%></td>
        <td> <%=registration.comment%></td>
+       <td> 
+       
+          <ul>
+            <%  for reg in registration.draw_registrations.select {|reg| reg.is_registered? } %>
+            <li><%=reg.draw.title%></li> 
+              <% if !reg.draw.is_single? %>
+                  Partner: <%= reg.partner%>
+              <%  end %>
+            <%  end %>
+          </ul>
+        </td>
         <td><%= link_to "Löschen", tournament_registration_path(registration.tournament, registration), :method => :delete, :confirm => "Bist du sicher?" %></td>
       </tr>
     <% end %>

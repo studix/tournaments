@@ -1,7 +1,7 @@
 Hallo <%=@registration.first_name%>
 
 Vielen Dank für deine Anmeldung zu den Clubmeisterschaften. Du hast dich für folgende Konkurrenzen angemeldet:
-<%  for reg in @registration.draw_registrations %>
+<%  for reg in @registration.draw_registrations.select {|reg| reg.is_registered? } %>
 - <%=reg.draw.title%>
 <%  end %>
 

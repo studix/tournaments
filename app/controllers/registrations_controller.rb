@@ -41,6 +41,7 @@ class RegistrationsController < ApplicationController
    # POST /registrations.json
    def create
      @registration = Registration.new(registration_params)
+     logger.info(registration_params)
      @registration.tournament = Tournament.find(params[:tournament_id])
 
      if @registration.valid?
@@ -72,6 +73,6 @@ class RegistrationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
       def registration_params
         params.require(:registration).permit(:tournament_id, :name, :first_name, :email, :classing, :classing_value, :comment, :phone, 
-          draw_registrations: [:id, :partner, :draw_id, :is_registered])
+          draw_registrations_attributes: [:id, :partner, :draw_id, :is_registered])
       end
   end

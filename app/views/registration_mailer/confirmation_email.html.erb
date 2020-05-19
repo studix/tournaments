@@ -9,9 +9,12 @@
 		Vielen Dank für deine Anmeldung zu den Clubmeisterschaften. Du hast dich für folgende Konkurrenzen angemeldet:
 	</p>
 	<ul>
-		<%  for reg in @registration.draw_registrations %>
-		<li><%=reg.draw.title%></li>
-		<%  end %>
+		<%  for reg in @registration.draw_registrations.select {|reg| reg.is_registered? } %>
+		<li><%=reg.draw.title%></li> 
+            <% if !reg.draw.is_single? %>
+                Partner: <%= reg.partner%>
+             <%  end %>
+          <%  end %>
 	</ul>
 	<!--<p>
 		Du erhältst kein Aufgebot. Spielpläne und Spielzeiten sind ab <%=@registration.tournament.spielplan_verfuegbar_datum.strftime('%d.%m.%Y')%> im Clubhhaus aufgehängt und im Internet abrufbar.

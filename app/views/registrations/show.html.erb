@@ -32,8 +32,11 @@
       <th scope="row">Angemeldet für:</th>
       <td>
         <ul>
-          <%  for draw in @registration.tournament.draws %>
-          <li><%=draw.title%></li>
+          <%  for reg in @registration.draw_registrations.select {|reg| reg.is_registered? } %>
+          <li><%=reg.draw.title%></li> 
+            <% if !reg.draw.is_single? %>
+                Partner: <%= reg.partner%>
+             <%  end %>
           <%  end %>
         </ul>
       </td>
