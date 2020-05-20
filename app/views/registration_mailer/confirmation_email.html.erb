@@ -10,10 +10,10 @@
 	</p>
 	<ul>
 		<%  for reg in @registration.draw_registrations.select {|reg| reg.is_registered? } %>
-		<li><%=reg.draw.title%></li> 
-            <% if !reg.draw.is_single? %>
-                Partner: <%= reg.partner%>
+		<li><%=reg.draw.title%> 
+            <% if !reg.draw.is_single? %> Partner: <%= reg.partner%>
              <%  end %>
+			</li>
           <%  end %>
 	</ul>
 	<!--<p>
