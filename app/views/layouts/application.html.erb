@@ -7,9 +7,21 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+      <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+</head>
 
   <body>
+  <!-- show nav links -->
+    <% if current_user %>
+      <!-- current_user will return true if a user is logged in -->
+     <%= link_to 'Log Out', logout_path %>
+    <% else %>
+      <!-- not logged in -->
+      <%= link_to 'Log In', login_path %>
+    <% end %>
+    <hr>
+    <!-- end -->
   <div class="container">
       <%= render 'layouts/messages' %>
       <%= yield %>

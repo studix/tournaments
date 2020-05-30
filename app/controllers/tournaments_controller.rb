@@ -1,5 +1,6 @@
 class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :destroy]
+  before_action :authorize
 
   # GET /tournaments
   # GET /tournaments.json

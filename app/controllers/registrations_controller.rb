@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
- 
+  before_action :authorize, only: [:edit, :update, :destroy]
+
    # GET /registrations
    # GET /registrations.json
    def index
