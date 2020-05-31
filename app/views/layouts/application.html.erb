@@ -11,20 +11,51 @@
   <%= yield(:head) %>
 </head>
 
-  <body>
-  <!-- show nav links -->
-    <% if current_user %>
-      <!-- current_user will return true if a user is logged in -->
-     <%= link_to 'Log Out', logout_path %>
-    <% else %>
-      <!-- not logged in -->
-      <%= link_to 'Log In', login_path %>
-    <% end %>
-    <hr>
-    <!-- end -->
-  <div class="container">
+ <body>
+
+  <!-- Wrapper div for sticky footer. Do not render for homage as it would break carousel (see comment below). -->
+  <% if !current_page?('/') %>
+  <div id="wrap">
+    <%end%>
+
+    <nav class="navbar fixed-top navbar-dark bg-dark justify-content-between">
+    <div class="container">
+          <span class="navbar-brand mb-0 h1">ClubTournaments</span>
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+        <li><%= link_to('Logout', logout_path, class: 'nav-link') %></li>
+        <% else %>
+        <li><%= link_to('Login', login_path, class: 'nav-link')  %></li>
+        <% end %>
+        </ul>
+     </div>
+  </nav>
+    
+    <div class="container">
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
-  </body>
+    <div id="push"></div>
+  </div>
+  
+  <div id="footer">
+    <div class="text-muted credit">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            <ul>
+              <li><%=link_to('About', about_path)%></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<% if !current_page?('/') %>
+</div>
+<%end%>
+</body>
 </html>
