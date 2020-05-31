@@ -39,7 +39,7 @@ class RegistrationsController < ApplicationController
    def new
      tournament = Tournament.find(params[:tournament_id])
      @registration = Registration.new(tournament:tournament)
-     tournament.draws.each do |draw|
+     tournament.draws.order('draws.is_single DESC, draws.title').each do |draw|
         @registration.draw_registrations.build(draw_id: draw.id)
      end
 
