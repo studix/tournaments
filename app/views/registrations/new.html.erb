@@ -17,6 +17,7 @@
 				   <%= draw_registrations_fields.label(:partner, class: "form-control-label") %>
                   <%= draw_registrations_fields.text_field(:partner, class: "form-text-input") %>
 				<% end%>
+				<label for="registration_draw_info" class="form-control-label"><%=draw_registrations_fields.object.draw.registration_info%></label>
 			</div>
 			<%end%>
 		</div>
