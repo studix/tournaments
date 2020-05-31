@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :tournaments do 
     resources :registrations
   end
-  get 'signup', to: 'users#new', as: 'signup'
+
+  get 'tournaments/:tournament_id/registrations/shared/:key', to: 'registrations#shared', as: 'admin_registrations'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'about', to: 'application#about', as: 'about'
