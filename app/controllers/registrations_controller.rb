@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_action :authorize, :except => :shared
+  before_action :authorize, only: [:edit, :update, :destroy]
   before_action :sharing_required, :only => :shared
 
    # GET /registrations
