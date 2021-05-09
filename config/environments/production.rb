@@ -70,7 +70,7 @@ Rails.application.configure do
     :port => 587,
     :domain => "tcdulliken.ch" ,
     :tls => true,
-    :authentication => ':plain',
+    :authentication => :plain,
     :user_name => 'apikey',
     :password => ENV['SENDGRID_API_KEY'],
     :enable_starttls_auto => true
