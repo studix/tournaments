@@ -20,3 +20,7 @@ insert into draws (id, tournament_id, is_single, title, created_at, updated_at, 
 insert into draws (id, tournament_id, is_single, title, created_at, updated_at, registration_info) values (22, 3, true, 'Mixed Doppel', '2022-05-29 10:00:00', '2022-05-29 10:00:00', null);
 insert into draws (id, tournament_id, is_single, title, created_at, updated_at, registration_info) values (23, 3, false, 'Damen Doppel', '2022-05-29 10:00:00', '2022-05-29 10:00:00', '(Partner werden zugelost)');
 insert into draws (id, tournament_id, is_single, title, created_at, updated_at, registration_info) values (24, 3, true, 'Herren Doppel 55+', '2022-05-29 10:00:00', '2022-05-29 10:00:00', '(Partner werden zugelost)');
+
+ALTER TABLE draw_registrations OWNER TO roger;
+
+GRANT roger to studer
