@@ -83,7 +83,7 @@ class RegistrationsController < ApplicationController
 
    def sharing_required
       # pull the key out of the URL and verify that the user has one to match
-      unless Sharing.where(tournament_id: params[:tournament_id], key: params[:key]).exists
+      unless Sharing.where(tournament_id: params[:tournament_id], key: params[:key]).exists?
       #unless Sharing.find(:first, :conditions => ['tournament_id = ? AND key = ?', params[:tournament_id], params[:key] ])
         flash[:error] = 'You do not have permission to view this page'
         redirect_to '/'
