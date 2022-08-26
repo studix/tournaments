@@ -16,7 +16,11 @@
       <tr>
         <td><%= tournament.title %></td>
         <td><%= tournament.spielplan_verfuegbar_datum %></td>
+        <% unless tournament.sharing.nil? %>
         <td><%= link_to 'Admin-Link', admin_registrations_path(:tournament_id=> tournament.id, :key=>tournament.sharing.key) %></td>
+        <% else %>
+        <td>Admin-Link</td>
+        <% end %>
         <td><%= link_to 'Show', tournament %></td>
         <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
         <td><%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
