@@ -1,6 +1,29 @@
-<h1>Editing Tournament</h1>
+<h1>Turnier editieren</h1>
 
-<%= render 'form', tournament: @tournament %>
+<%= form_for @tournament do |form|%>
+<div class="mb-3">
+    <label for="title" class="form-label">Turniertitel</label>
+	<%= form.text_field(:title, class: "form-control") %>
+</div>
+<%= form.fields_for :draws, form.object.draws.order(:id) do |f|%>
+<div class="mb-3">
+    <label class="form-label">Konkurrenz <%=f.options[:child_index] + 1%></label>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <%= f.text_field(:title, placeholder: "Titel", class: "form-control") %>
+        </div>
+        <div class="col-md-1">
+            <%= f.select(:is_single, [['Einzel', true], ['Doppel', false]], class: "form-control") %>
+        </div>
+        <div class="col-md-4">
+            <%= f.text_field(:registration_info, placeholder: "Bemerkung", class: "form-control") %>
+        </div>
+    </div>
+</div>
 
-<%= link_to 'Show', @tournament %> |
-<%= link_to 'Back', tournaments_path %>
+<% end %>
+<div class="form-actions">
+	<%= form.submit "Speichern", :class => "btn btn-lg btn-primary"  %>
+</div>
+<% end %>
+
