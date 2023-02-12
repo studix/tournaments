@@ -1,4 +1,4 @@
-FROM ruby:2.7.6
+FROM ruby:3.1.3
 WORKDIR /usr/src/app 
 COPY Gemfile Gemfile.lock ./ 
 ADD . /usr/src/app/ 
