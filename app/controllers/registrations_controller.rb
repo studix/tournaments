@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
     @registrations = Tournament.find(params[:tournament_id]).registrations
 
     respond_to do |format|
-      format.html { render :template => "registrations/index.html.erb" }
+      format.html { render :template => "registrations/index" }
       format.json { render json: @registrations }
     end
   end
